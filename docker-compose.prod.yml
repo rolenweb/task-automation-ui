@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  mis-prod:
+    container_name: mis-prod
+    build:
+      context: .
+      dockerfile: docker/node/prod.Dockerfile
+    ports:
+      - '80:80'
