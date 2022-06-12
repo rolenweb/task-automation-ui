@@ -7,8 +7,6 @@
           <b-row class="justify-content-center">
             <b-col xl="5" lg="6" md="8" class="px-5">
               <h1 class="text-white">Create an account</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for
-                free.</p>
             </b-col>
           </b-row>
         </div>
@@ -26,23 +24,7 @@
       <b-row class="justify-content-center">
         <b-col lg="6" md="8" >
           <b-card no-body class="bg-secondary border-0">
-            <b-card-header class="bg-transparent pb-5">
-              <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-              <div class="text-center">
-                <a href="#" class="btn btn-neutral btn-icon mr-4">
-                  <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
-              </div>
-            </b-card-header>
             <b-card-body class="px-lg-5 py-lg-5">
-              <div class="text-center text-muted mb-4">
-                <small>Or sign up with credentials</small>
-              </div>
               <validation-observer v-slot="{handleSubmit}" ref="formValidator">
                 <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
                   <base-input alternative
@@ -96,7 +78,7 @@
   </div>
 </template>
 <script>
-
+  import {mapActions} from "vuex";
   export default {
     name: 'register',
     data() {
@@ -110,8 +92,9 @@
       }
     },
     methods: {
+      ...mapActions('auth', ['login']),
       onSubmit() {
-        // this will be called only after form is valid. You can do an api call here to register users
+        this.login(this.model)
       }
     }
 

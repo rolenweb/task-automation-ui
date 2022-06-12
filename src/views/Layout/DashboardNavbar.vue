@@ -39,7 +39,7 @@
                     <img alt="Image placeholder" src="img/theme/team-4.jpg">
                   </span>
             <b-media-body class="ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+              <span class="mb-0 text-sm  font-weight-bold">{{user.name}}</span>
             </b-media-body>
           </b-media>
         </a>
@@ -49,7 +49,7 @@
           <b-dropdown-header class="noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </b-dropdown-header>
-          <b-dropdown-item href="#!">
+          <b-dropdown-item >
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
           </b-dropdown-item>
@@ -66,7 +66,7 @@
             <span>Support</span>
           </b-dropdown-item>
           <div class="dropdown-divider"></div>
-          <b-dropdown-item href="#!">
+          <b-dropdown-item @click="logout">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </b-dropdown-item>
@@ -79,6 +79,7 @@
 <script>
 import { CollapseTransition } from 'vue2-transitions';
 import { BaseNav, Modal } from '@/components';
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   components: {
@@ -94,6 +95,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('auth', ['user']),
     routeName() {
       const { name } = this.$route;
       return this.capitalizeFirstLetter(name);
@@ -108,6 +110,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('auth', ['logout']),
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },

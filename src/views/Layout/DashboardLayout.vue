@@ -14,19 +14,38 @@
 
         <sidebar-item
             :link="{
-              name: 'Icons',
-              path: '/icons',
-              icon: 'ni ni-planet text-blue'
+              name: 'Accounts',
+              path: '/accounts',
+              icon: 'ni ni-bulb-61 text-blue'
               }"
             >
         </sidebar-item>
 
         <sidebar-item
-              :link="{
-                name: 'Maps',
-                path: '/maps',
-                icon: 'ni ni-pin-3 text-orange'
-              }">
+            :link="{
+              name: 'Tasks',
+              path: '/tasks',
+              icon: 'ni ni-bullet-list-67 text-blue'
+              }"
+            >
+        </sidebar-item>
+
+        <sidebar-item
+            :link="{
+              name: 'Users',
+              path: '/users',
+              icon: 'ni ni-single-02 text-blue'
+              }"
+            >
+        </sidebar-item>
+
+        <sidebar-item
+            :link="{
+              name: 'Icons',
+              path: '/icons',
+              icon: 'ni ni-planet text-blue'
+              }"
+            >
         </sidebar-item>
 
         <sidebar-item
@@ -43,21 +62,6 @@
                   path: '/tables',
                   icon: 'ni ni-bullet-list-67 text-red'
                 }">
-        </sidebar-item>
-
-        <sidebar-item
-                  :link="{
-                    name: 'Login',
-                    path: '/login',
-                    icon: 'ni ni-key-25 text-info'
-                  }">
-        </sidebar-item>
-        <sidebar-item
-                  :link="{
-                    name: 'Register',
-                    path: '/register',
-                    icon: 'ni ni-circle-08 text-pink'
-                  }">
         </sidebar-item>
       </template>
 
@@ -120,6 +124,7 @@
   import ContentFooter from './ContentFooter.vue';
   import DashboardContent from './Content.vue';
   import { FadeTransition } from 'vue2-transitions';
+  import {mapActions} from "vuex";
 
   export default {
     components: {
@@ -129,6 +134,7 @@
       FadeTransition
     },
     methods: {
+      ...mapActions('auth', ['loadUserInfo']),
       initScrollbar() {
         let isWindows = navigator.platform.startsWith('Win');
         if (isWindows) {
@@ -138,6 +144,7 @@
     },
     mounted() {
       this.initScrollbar()
+      this.loadUserInfo();
     }
   };
 </script>

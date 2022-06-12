@@ -23,6 +23,21 @@ const routes = [
         component: () => import(/* webpackChunkName: "demo" */ '../views/Icons.vue')
       },
       {
+        path: '/accounts',
+        name: 'accounts',
+        component: () => import('../views/Pages/Account/AccountList')
+      },
+      {
+        path: '/tasks',
+        name: 'tasks',
+        component: () => import('../views/Pages/Task/TaskList')
+      },
+      {
+        path: '/users',
+        name: 'users',
+        component: () => import('../views/Pages/User/UserList')
+      },
+      {
         path: '/profile',
         name: 'profile',
         component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/UserProfile.vue')
