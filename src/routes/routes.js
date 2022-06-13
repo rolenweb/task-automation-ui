@@ -28,6 +28,11 @@ const routes = [
         component: () => import('../views/Pages/Account/AccountList')
       },
       {
+        path: '/account/create',
+        name: 'Create account',
+        component: () => import('../views/Pages/Account/AccountCreate')
+      },
+      {
         path: '/tasks',
         name: 'tasks',
         component: () => import('../views/Pages/Task/TaskList')

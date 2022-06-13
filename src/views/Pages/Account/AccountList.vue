@@ -1,7 +1,9 @@
 <template>
   <div>
     <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-success">
-
+      <b-container fluid class="d-flex align-items-center justify-content-end">
+        <router-link to="/account/create" class="btn btn-info">Create account</router-link>
+      </b-container>
     </base-header>
     <b-container fluid class="mt--7">
       <b-row>
@@ -19,7 +21,10 @@ import LightTable from "../../Tables/RegularTables/LightTable";
 
 export default {
   name: "AccountList",
-  components: {LightTable}
+  components: {LightTable},
+  methods: {
+
+  }
 }
 </script>
 
