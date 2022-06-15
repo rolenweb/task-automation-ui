@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { loadUserInfo, logout} from "@/plugins/keycloak-util";
 
 export default {
@@ -11,7 +12,7 @@ export default {
           loadUserInfo().then((response) => {
             commit('setUser', response)
           }).catch((error) => {
-            this.$log.error(error);
+            Vue.$log.error(error);
             commit('setError', error, true);
           })
         },

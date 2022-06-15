@@ -38,6 +38,11 @@ const routes = [
         component: () => import('../views/Pages/Task/TaskList')
       },
       {
+        path: '/account/task/create',
+        name: 'Create task',
+        component: () => import('../views/Pages/Task/TaskCreate')
+      },
+      {
         path: '/users',
         name: 'users',
         component: () => import('../views/Pages/User/UserList')

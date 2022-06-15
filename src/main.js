@@ -19,7 +19,7 @@ Vue.$keycloak.init({ onLoad: 'login-required' }).then((auth) => {
     window.location.reload();
   } else {
     Vue.$log.info("Authenticated");
-
+    store.$axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.$keycloak.token;
     // If a user is authenticated Vue will be initiated
     /* eslint-disable no-new */
     new Vue({

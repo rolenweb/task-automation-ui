@@ -124,7 +124,7 @@
   import ContentFooter from './ContentFooter.vue';
   import DashboardContent from './Content.vue';
   import { FadeTransition } from 'vue2-transitions';
-  import {mapActions} from "vuex";
+  import {mapActions, mapGetters} from "vuex";
 
   export default {
     components: {
@@ -133,8 +133,12 @@
       DashboardContent,
       FadeTransition
     },
+    computed: {
+      ...mapGetters('auth', ['user'])
+    },
     methods: {
       ...mapActions('auth', ['loadUserInfo']),
+      ...mapActions('account', ['loadAccountByUserId']),
       initScrollbar() {
         let isWindows = navigator.platform.startsWith('Win');
         if (isWindows) {
@@ -145,6 +149,11 @@
     mounted() {
       this.initScrollbar()
       this.loadUserInfo();
+    },
+    watch: {
+      user(val) {
+        this.loadAccountByUserId(val.sub)
+      }
     }
   };
 </script>
