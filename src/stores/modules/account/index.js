@@ -8,7 +8,7 @@ export default {
     accounts: []
   },
   actions: {
-    createAccount({commit}, data) {
+    createAccount({commit, dispatch}, data) {
       this.$axios.post(process.env.VUE_APP_API + '/account/create/', data)
         .then((response) => {
           commit('setAccount', response.data);
@@ -16,17 +16,21 @@ export default {
         })
         .catch((error) => {
           Vue.$log.info(error)
-          commit('setError', error, true);
+          dispatch('error/addError', error, {root: true})
         })
     },
-    loadAccountByUserId({commit}, id) {
+    loadAccountByUserId({commit, dispatch}, id) {
       this.$axios.get(process.env.VUE_APP_API + '/account/get-by-user/' + id)
         .then((response) => {
           commit('setAccount', response.data)
         })
         .catch((error) => {
           Vue.$log.info(error)
-          commit('setError', error, true);
+          dispatch('error/addError', error, {root: true})
+          dispatch('createAccount', {
+            name: 'account',
+            userid: id,
+          })
         })
     }
   },

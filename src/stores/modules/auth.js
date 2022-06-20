@@ -8,19 +8,16 @@ export default {
         user: {},
     },
     actions: {
-        loadUserInfo({commit}) {
+        loadUserInfo({commit, dispatch}) {
           loadUserInfo().then((response) => {
             commit('setUser', response)
           }).catch((error) => {
             Vue.$log.error(error);
-            commit('setError', error, true);
+            dispatch('error/addError', error, {root: true})
           })
         },
         logout() {
           logout();
-        },
-        clearError({commit}) {
-            commit('setError', {}, true);
         },
         clear({commit}) {
             commit('setUser', {})

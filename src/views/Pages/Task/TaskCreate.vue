@@ -49,8 +49,8 @@ export default {
     return {
       task: {
         name: null,
-        details: null,
-        accountId: null,
+        details: {},
+        account: {},
       }
     };
   },
