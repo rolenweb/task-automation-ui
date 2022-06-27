@@ -43,6 +43,16 @@ const routes = [
         component: () => import('../views/Pages/Task/TaskCreate')
       },
       {
+        path: '/extractors',
+        name: 'extractors',
+        component: () => import('../views/Pages/Extractor/ExtractorList')
+      },
+      {
+        path: '/extractor/create',
+        name: 'Create extractor',
+        component: () => import('../views/Pages/Extractor/ExtractorCreate')
+      },
+      {
         path: '/users',
         name: 'users',
         component: () => import('../views/Pages/User/UserList')

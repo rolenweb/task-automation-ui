@@ -32,6 +32,15 @@
 
         <sidebar-item
             :link="{
+              name: 'Extractors',
+              path: '/extractors',
+              icon: 'ni ni-archive-2 text-blue'
+              }"
+            >
+        </sidebar-item>
+
+        <sidebar-item
+            :link="{
               name: 'Users',
               path: '/users',
               icon: 'ni ni-single-02 text-blue'
