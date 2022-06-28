@@ -19,6 +19,32 @@
             </b-col>
 
           </b-row>
+          <b-row v-for="(field, index) in extractor.fields" :key="index">
+            <b-col lg="6">
+              <base-input
+                type="text"
+                label="Field name"
+                placeholder="Field name"
+                v-model="field.name"
+              >
+              </base-input>
+            </b-col>
+            <b-col lg="6">
+              <base-input
+                type="text"
+                label="Field value"
+                placeholder="Field value"
+                v-model="field.value"
+              >
+              </base-input>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col lg="12 d-flex flex-row-reverse">
+              <button class="btn btn-info" @click="addFieldHandler">Add field</button>
+            </b-col>
+          </b-row>
+          <hr>
           <b-row>
             <b-col lg="12">
               <button type="submit" class="btn btn-info">Save</button>
@@ -41,7 +67,12 @@ export default {
     return {
       extractor: {
         name: null,
-        data: {}
+        fields: [
+          {
+            name: '',
+            value: ''
+          }
+        ]
       }
     };
   },
@@ -51,7 +82,13 @@ export default {
   methods: {
     //...mapActions('account',['createAccount']),
     createExtractorHandler() {
-      this.$log.info('Save extractor');
+      this.$log.info(this.extractor);
+    },
+    addFieldHandler() {
+      this.extractor.fields.push({
+        name: '',
+        value: ''
+      });
     }
   }
 }
