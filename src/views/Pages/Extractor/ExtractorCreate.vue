@@ -20,7 +20,7 @@
 
           </b-row>
           <b-row v-for="(field, index) in extractor.fields" :key="index">
-            <b-col lg="6">
+            <b-col lg="5">
               <base-input
                 type="text"
                 label="Field name"
@@ -37,6 +37,9 @@
                 v-model="field.value"
               >
               </base-input>
+            </b-col>
+            <b-col lg="1" class="d-flex align-items-center">
+              <button class="btn btn-danger" @click="removeFieldHandler(field.id)"><i class="ni ni-fat-delete"></i></button>
             </b-col>
           </b-row>
           <b-row>
@@ -60,6 +63,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: "ExtractorCreate",
@@ -69,6 +73,7 @@ export default {
         name: null,
         fields: [
           {
+            id: uuidv4(),
             name: '',
             value: ''
           }
@@ -86,9 +91,14 @@ export default {
     },
     addFieldHandler() {
       this.extractor.fields.push({
+        id: uuidv4(),
         name: '',
         value: ''
       });
+    },
+    removeFieldHandler(id) {
+      this.$log.info('remove field ' + id);
+      this.extractor.fields = this.extractor.fields.filter(field => field.id !== id);
     }
   }
 }
