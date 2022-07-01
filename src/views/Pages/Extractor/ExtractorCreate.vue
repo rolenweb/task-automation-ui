@@ -19,7 +19,8 @@
             </b-col>
 
           </b-row>
-          <b-row v-for="(field, index) in extractor.fields" :key="index">
+          <h6 class="heading-small text-muted mb-4">Spider</h6>
+          <b-row v-for="(field, index) in extractor.spider.fields" :key="field.id">
             <b-col lg="5">
               <base-input
                 type="text"
@@ -39,12 +40,41 @@
               </base-input>
             </b-col>
             <b-col lg="1" class="d-flex align-items-center">
-              <button class="btn btn-danger" @click="removeFieldHandler(field.id)"><i class="ni ni-fat-delete"></i></button>
+              <button class="btn btn-danger" @click="removeFieldHandler('spider', field.id)"><i class="ni ni-fat-delete"></i></button>
             </b-col>
           </b-row>
           <b-row>
             <b-col lg="12 d-flex flex-row-reverse">
-              <button class="btn btn-info" @click="addFieldHandler">Add field</button>
+              <button class="btn btn-info" @click="addFieldHandler('spider')">Add field</button>
+            </b-col>
+          </b-row>
+          <h6 class="heading-small text-muted mb-4">Scraper</h6>
+          <b-row v-for="(field, index) in extractor.scraper.fields" :key="field.id">
+            <b-col lg="5">
+              <base-input
+                type="text"
+                label="Field name"
+                placeholder="Field name"
+                v-model="field.name"
+              >
+              </base-input>
+            </b-col>
+            <b-col lg="6">
+              <base-input
+                type="text"
+                label="Field value"
+                placeholder="Field value"
+                v-model="field.value"
+              >
+              </base-input>
+            </b-col>
+            <b-col lg="1" class="d-flex align-items-center">
+              <button class="btn btn-danger" @click="removeFieldHandler('scraper', field.id)"><i class="ni ni-fat-delete"></i></button>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col lg="12 d-flex flex-row-reverse">
+              <button class="btn btn-info" @click="addFieldHandler('scraper')">Add field</button>
             </b-col>
           </b-row>
           <hr>
@@ -71,13 +101,24 @@ export default {
     return {
       extractor: {
         name: null,
-        fields: [
-          {
-            id: uuidv4(),
-            name: '',
-            value: ''
-          }
-        ]
+        spider: {
+          fields: [
+            {
+              id: uuidv4(),
+              name: '',
+              value: ''
+            }
+          ]
+        },
+        scraper: {
+          fields: [
+            {
+              id: uuidv4(),
+              name: '',
+              value: ''
+            }
+          ]
+        }
       }
     };
   },
@@ -89,16 +130,16 @@ export default {
     createExtractorHandler() {
       this.$log.info(this.extractor);
     },
-    addFieldHandler() {
-      this.extractor.fields.push({
+    addFieldHandler(type) {
+      this.extractor[type].fields.push({
         id: uuidv4(),
         name: '',
         value: ''
       });
     },
-    removeFieldHandler(id) {
+    removeFieldHandler(type, id) {
       this.$log.info('remove field ' + id);
-      this.extractor.fields = this.extractor.fields.filter(field => field.id !== id);
+      this.extractor[type].fields = this.extractor[type].fields.filter(field => field.id !== id);
     }
   }
 }
